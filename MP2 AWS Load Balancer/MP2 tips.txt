@@ -1,0 +1,40 @@
+0. two EC2 instances have to be in different Availability Zone or the health check would fail
+   (in the subnet part in Networking section)
+
+1. host name in putty: ec2-user@(IPV4-Public-DNS-Name)
+
+2. set port to be 5000 in flask app
+   test GET and POST in Chrome Postman
+   
+3. In Postman when dealing with POST:
+   in the "body" section, select "raw", switch "Text" to "JSON"
+   enter a JSON object (eg. {"num": 100})
+
+
+4. process to run flask app after ssh to EC2 instances:
+pip3 install virtualenv
+
+mkdir mp2
+
+cd mp2
+
+virtualenv venv
+
+python3 -m virtualenv venv
+
+. venv/bin/activate
+
+pip install Flask
+
+###################################
+After the above steps, open WinSCP and transfer server files to mp2 folder in two EC2 instances, 
+then do the following in putty:
+
+export FLASK_APP=server.py
+
+flask run --host=0.0.0.0
+
+
+5. target group port set to 5000 (same as flask app)
+   load balancer listener remains unchanged (80)
+   add EC2 security group to load balancer security group
