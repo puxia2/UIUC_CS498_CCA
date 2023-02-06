@@ -38,3 +38,4 @@ flask run --host=0.0.0.0
 5. target group port set to 5000 (same as flask app)
    load balancer listener remains unchanged (80)
    add EC2 security group to load balancer security group
+   make sure putty is still connecting with two EC2 when configuring target group and load balancer
