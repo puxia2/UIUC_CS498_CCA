@@ -1,0 +1,26 @@
+Useful websites/tutorials:
+
+Serverless POST API:
+https://medium.com/accenture-the-dock/serverless-api-with-aws-and-python-tutorial-3dff032628a7
+
+BFS:
+https://pythoninwonderland.wordpress.com/2017/03/18/how-to-implement-breadth-first-search-in-python/
+
+boto3 on DynamoDB:
+https://boto3.amazonaws.com/v1/documentation/api/latest/guide/dynamodb.html
+
+AWS Lex with Lambda:
+https://chatbotsmagazine.com/quick-start-develop-a-chat-bot-with-aws-lex-lambda-part-1-b6f7c80ebba6
+
+Cognito Identity Pool:
+https://aws.amazon.com/blogs/machine-learning/greetings-visitor-engage-your-web-users-with-amazon-lex/ 
+
+
+Lambda time out changes to 5 secs
+
+
+
+
+
+
+
