@@ -1,0 +1,38 @@
+# show existing database
+SHOW DATABASES;
+
+# Create db
+-- CREATE DATABASE mp6;
+
+# make mp6 default database
+USE mp6;
+
+#########
+-- drop table heros;
+#########
+
+# create a table with the following fields:
+#  id, hero, power, name, xp, color
+CREATE TABLE heros
+(
+  id           INT unsigned NOT NULL,
+  hero         VARCHAR(20) NOT NULL,               
+  power        VARCHAR(20) NOT NULL,                
+  name         VARCHAR(20) NOT NULL,                      
+  xp           VARCHAR(20) NOT NULL,                                   
+  color		   VARCHAR(20) NOT NULL
+);
+
+# load data
+LOAD DATA FROM S3 's3://mp6-pu/mp6input.csv' 
+    INTO TABLE heros
+    FIELDS TERMINATED BY ','
+    LINES TERMINATED BY '\n'
+    IGNORE 1 ROWS;
+
+
+select * from heros;
+
+SET SQL_SAFE_UPDATES = 0;
+
+DELETE FROM heros WHERE  id >=26;

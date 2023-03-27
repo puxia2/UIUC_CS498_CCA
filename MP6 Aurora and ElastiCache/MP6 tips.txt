@@ -1,0 +1,32 @@
+1. access Aurora database with MySQL workbench:
+in the security group, add a rule with type = "MYSQL/Aurora", port = 3306 and source=ip address
+
+2. in MySQL workbench:
+set id to be "INT unsigned NOT NULL" (this is important, otherwise the MAX(id) you get from table will be 9 instead of 25 and the type will be "None")
+when loading data from S3, remember to "INGNORE 1 ROWS"
+if wanting to delete a row from the table, add this line: "SET SQL_SAFE_UPDATES = 0;"
+
+3. make sure all in the same VPC(Redis, Aurora, Lambda)
+
+4. create Redis cluster:
+cluster mode is "disabled"
+
+
+
+5. Connect to Redis with EC2 instance:
+sudo yum install gcc
+curl -O http://download.redis.io/redis-stable.tar.gz
+tar xvzf redis-stable.tar.gz
+
+cd redis-stable
+make distclean  # Ubuntu systems only
+make
+
+src/redis-cli -h redis-new-mp6.8rmbia.ng.0001.use1.cache.amazonaws.com -c -p 6379
+
+6. refer to the link below to install python dependencies in AWS Lambda:
+https://www.geeksforgeeks.org/how-to-install-python-packages-for-aws-lambda-layers/
+
+7. set up IAM roles for Lambda and attach Lambda to the same vpc in "Configuration" tab.
+
+8. Try reboot the redis node if the grader test fails.
