@@ -1,0 +1,5 @@
+SELECT "airline", "origin_airport", "destination_airport"
+FROM "mp9-airline"."etl_result_pu"
+WHERE "origin_airport" = 'ORD'
+AND "scheduled_departure" >= 800 AND "scheduled_departure" < 1200
+AND "month" = 12 AND "day" = 25;

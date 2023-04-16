@@ -1,0 +1,14 @@
+SELECT * FROM
+(SELECT f1.airline, f1.origin_airport, f1.destination_airport as Stopover_Airport, f1.destination_airport,
+f1.departure_delay as Origin_Departure_Delay, f1.arrival_delay as Stopover_Arrival_Delay,
+f2.departure_delay as Stopover_Departure_Delay, f2.arrival_delay as Destination_Arrival_Delay,
+f2.day*24*60 + (f2.scheduled_departure / 100)*60 + (f2.scheduled_departure % 100) + f2.departure_delay - (f1.day*24*60 + (f1.scheduled_departure / 100)*60 + (f1.scheduled_departure % 100) + f1.departure_delay + f1.elapsed_time + ((f1.scheduled_arrival / 100)*60 + (f1.scheduled_arrival % 100) - ((f1.scheduled_departure / 100)*60 + (f1.scheduled_departure % 100) + f1.scheduled_time)%(24*60))) as stop_over_time
+FROM
+(SELECT * FROM "mp9-airline"."etl_result_pu") as f1 
+INNER JOIN
+(SELECT * FROM "mp9-airline"."etl_result_pu") as f2
+ON f1.airline = f2.airline 
+AND f1.destination_airport = f2.origin_airport
+AND f1.origin_airport = 'SFO'
+AND f2.destination_airport = 'JFK' AND f1.cancelled = 0 AND f2.cancelled = 0) as f
+WHERE 60 <= f.stop_over_time AND f.stop_over_time <= 180;

@@ -1,0 +1,13 @@
+1. when adding an IAM role for the crawler, remember to attach policy to the role to make S3 full acess to the crawler;
+Do the same when adding an IAM role for the ETL job.
+
+2. ETL: source: S3 target
+Transform: select fields
+source: S3 bucket
+
+3. save ETL jo results, Athena query results and bucket that contains CSV in different S3 buckets.
+
+4. if your result is an empty table with perhaps 5 more rows in the Athena test, try to make a new crawler and set the data source as
+the transfomed S3 results.
+
+5. the way to determine if a CSV is tab-separated or comma-separated is to open the csv with a notepad. 
